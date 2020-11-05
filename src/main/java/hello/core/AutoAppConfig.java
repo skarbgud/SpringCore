@@ -32,7 +32,7 @@ public class AutoAppConfig {
     (spring.main.allow-bean-definition-overriding=true로 세팅시 수동이 오버라이딩 가능하게 한다.)
      */
 
-    @Bean(name = "memoryMemberRepository")
+//    @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
