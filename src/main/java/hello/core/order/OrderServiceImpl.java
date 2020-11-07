@@ -13,19 +13,18 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService {
 
     // 필드 주입
-    @Autowired private MemberRepository memberRepository;
-    @Autowired private DiscountPolicy discountPolicy;
+//    @Autowired private MemberRepository memberRepository;
+//    @Autowired private DiscountPolicy discountPolicy;
 
-    @Autowired  //일반 메서드 주입
-    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    @Autowired  //일반 메서드 주입
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     // private final -> 값이 필수적으로 있어야 함
-//    private MemberRepository memberRepository;
-//    private DiscountPolicy dis
-//    countPolicy;
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
     /*
     // setter 주입은 빈을 다 등록하고 의존관계 주입단계에서 이루어 진다.
@@ -44,14 +43,12 @@ public class OrderServiceImpl implements OrderService {
 
     // @Autowired -> 생성자가 하나일 때에는 @Autowired를 생략할 수 있다.
     // 생성자 주입은 객체가 생성될 때 주입된다.
-    /*
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-     */
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
