@@ -6,10 +6,12 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     // 필드 주입
@@ -41,14 +43,15 @@ public class OrderServiceImpl implements OrderService {
     }
     */
 
+    /*
     // @Autowired -> 생성자가 하나일 때에는 @Autowired를 생략할 수 있다.
     // 생성자 주입은 객체가 생성될 때 주입된다.
-    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+     */
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
