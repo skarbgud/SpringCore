@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     // 필드 주입
@@ -25,7 +25,9 @@ public class OrderServiceImpl implements OrderService {
 //    }
 
     // private final -> 값이 필수적으로 있어야 함
+    @Autowired
     private final MemberRepository memberRepository;
+    @Autowired
     private final DiscountPolicy discountPolicy;
 
     /*
@@ -43,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     }
     */
 
-    /*
+
     // @Autowired -> 생성자가 하나일 때에는 @Autowired를 생략할 수 있다.
     // 생성자 주입은 객체가 생성될 때 주입된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
@@ -51,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-     */
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
