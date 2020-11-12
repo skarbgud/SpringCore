@@ -25,10 +25,11 @@ public class OrderServiceImpl implements OrderService {
 //    }
 
     // private final -> 값이 필수적으로 있어야 함
-    @Autowired
-    private final MemberRepository memberRepository;
-    @Autowired
-    private final DiscountPolicy discountPolicy;
+      private final MemberRepository memberRepository;
+      private final DiscountPolicy discountPolicy;
+
+      @Autowired
+      private DiscountPolicy rateDiscountPolicy;
 
     /*
     // setter 주입은 빈을 다 등록하고 의존관계 주입단계에서 이루어 진다.
@@ -48,10 +49,11 @@ public class OrderServiceImpl implements OrderService {
 
     // @Autowired -> 생성자가 하나일 때에는 @Autowired를 생략할 수 있다.
     // 생성자 주입은 객체가 생성될 때 주입된다.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = rateDiscountPolicy;
     }
 
 
