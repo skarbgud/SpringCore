@@ -50,11 +50,17 @@ public class OrderServiceImpl implements OrderService {
 
     // @Autowired -> 생성자가 하나일 때에는 @Autowired를 생략할 수 있다.
     // 생성자 주입은 객체가 생성될 때 주입된다.
+    /*
+        @Qualifier
+        1. @Qualifier 끼리 매칭
+        2. 빈 이름 매칭
+        3. NoSuchBeanDefinitionException 에러 발생
+     */
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy rateDiscountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
-        this.discountPolicy = rateDiscountPolicy;
+        this.discountPolicy = discountPolicy;
     }
 
 
