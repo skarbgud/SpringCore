@@ -1,6 +1,15 @@
 package hello.core.lifecycle;
 
-public class NetworkClient {
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+/*  초기화, 소멸 인터페이스 단점
+    - 스프링 전용 인터페이스에 의존적이다.
+    - 초기화, 소멸 메소드의 이름을 변경할 수 없다.
+    - 내가 코드를 고칠 수 없는 라이브러리에 적용할 수 없다.
+    (거의 사용 하지 않는다)
+ */
+public class NetworkClient implements InitializingBean, DisposableBean {
 
     private String url;
 
@@ -26,5 +35,18 @@ public class NetworkClient {
     //서비스 종료시 호출
     public void disconnect() {
         System.out.println("close: " + url);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("NetworkClient.afterPropertiesSet");
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("NetworkClient.destroy");
+        disconnect();
     }
 }
