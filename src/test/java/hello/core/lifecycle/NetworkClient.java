@@ -9,7 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
     - 내가 코드를 고칠 수 없는 라이브러리에 적용할 수 없다.
     (거의 사용 하지 않는다)
  */
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient{
 
     private String url;
 
@@ -37,6 +37,18 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close: " + url);
     }
 
+    public void init() {
+        System.out.println("NetworkClient.afterPropertiesSet");
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    public void close() {
+        System.out.println("NetworkClient.destroy");
+        disconnect();
+    }
+
+    /*
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("NetworkClient.afterPropertiesSet");
@@ -49,4 +61,5 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
+     */
 }
