@@ -1,6 +1,8 @@
 package hello.core.scope;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -34,7 +36,7 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
 
         /*
             스프링은 일반적으로 싱글톤을 사용한다. 싱글톤 빈은 생성 시점에만 의존관계를 주입
@@ -45,16 +47,24 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("singleton")
     static class ClientBean {
-        private final PrototypeBean prototypeBean; //생성시점에 주입
+//        private final PrototypeBean prototypeBean; //생성시점에 주입
 
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+//        private ObjectProvider<PrototypeBean> prototypeBeanProvider; // Factory에 편의기능 추가
+        private ObjectFactory<PrototypeBean> prototypeBeanProvider; // -> getObject 하나만 제공
+
+//        @Autowired
+//        public ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
 
         public int logic() {
+//            prototypeBean.addCount();
+//            int count = prototypeBean.getCount();
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject(); //항상 새로운 프로토 타입 빈 제공
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
+
             return count;
         }
     }
