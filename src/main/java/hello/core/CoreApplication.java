@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 						// @ComponentScan이 포함되어 있다
 public class CoreApplication {
 
-	public static void main(String[] args) {
+	public static void
+	main(String[] args) {
 		SpringApplication.run(CoreApplication.class, args);
 	}
 
